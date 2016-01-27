@@ -37,8 +37,7 @@ $(document).ready(function(){
 	function printTime () {
 	  
 	  var current = $('.js-player').prop('currentTime');
-	  console.debug('Current time: ' + current);
-	  $('progress').progressbar({value: currentTime});
+	  console.debug('Current time: ' + current); 
 
 	}
 
