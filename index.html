@@ -1,0 +1,71 @@
+<html>
+<head>
+	<title>Spotify  Player</title>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="widget">
+
+		<form class="js-form" action="" method="post">
+		    Pleeeease.... Sing me this song:
+		    <input class ="js-input" type="text" name="artist" />
+		    <button class ="js-submit" type="submit">Send</button>
+		</form>
+
+		<div class="header">
+		<!-- Try adding/removing these classes: -->
+		<!-- disabled -->
+		<!-- playing -->
+			<div class="btn-play">
+				
+			</div>
+
+			<div class="metadata">
+				  <p class="title">Hunger of The Pine</p>
+				  <p class="author">alt-J</p>
+
+				  <div class="seekbar">
+				    <progress value="5" max="30"></progress>
+				  </div>
+			</div>
+		</div>
+
+		<div class="cover">
+			<img class="js-player" src="https://i.scdn.co/image/04da6dfc1f5f45fdeba938a0cc71cf372524fd43">
+		</div>
+
+		<audio class="js-player" src="https://p.scdn.co/mp3-preview/8e9c5ffdc38e91659bfe8b6bd44650dfc25a3d31"></audio>
+	</div>
+
+
+
+
+	<div class="modal fade js-modal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <div class="modal-header">
+	        <!-- Close button -->
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span>&times;</span>
+	        </button>
+
+	        <h2>This is the modal's header.</h2>
+	      </div>
+
+	      <div class="modal-body">
+	        <p>This is the modal's body.</p>
+	      </div>
+
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	
+
+</body>
+ <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</html>
+
