@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	
+
+	var currentArtist;
+
 	$(".js-form").on("submit",function(event){
     	event.preventDefault();
 
@@ -7,8 +9,7 @@ $(document).ready(function(){
 		  	type: 'GET',
 		  	url: 'https://api.spotify.com/v1/search?type=track&query=' + $(".js-input").val(),
 		 	success: function(response){
-		      	console.log(response);
-		        showInfoTrack(response);		
+		        showInfoTrack(response);
 		    },
 		    error: function(){ 
 		    	console.log("Ohhhhhh");
@@ -16,13 +17,17 @@ $(document).ready(function(){
 	  	});
 	});
 
+
 	function showInfoTrack(response){
+		currentArtist=response.tracks.items[0].artists[0].id;
 		$(".title").html(response.tracks.items[0].name);
-		$(".author").html(response.tracks.items[0].artists[0].name);
+		$(".author").html('<a id="artistInfo" data-toggle="modal" href="#myModal">' 
+    	+ response.tracks.items[0].artists[0].name + '</a>');
 		$("img").attr("src", response.tracks.items[0].album.images[0].url);
 		$("audio").attr("src", response.tracks.items[0].preview_url);	
 		$(".btn-play").removeClass("playing");
 	}
+
 
 	$(".btn-play").click(function(){
 		$(".btn-play").toggleClass("playing");
@@ -33,18 +38,38 @@ $(document).ready(function(){
 	}); 
 
 
-	// Define a function to print the player's current time
 	function printTime () {
-	  
 	  var current = $('.js-player').prop('currentTime');
-	  console.debug('Current time: ' + current); 
+	  
+	  $("progress").attr("value", current);
 
+	  if(current >= $("progress").attr("max")){
+	  	$(".btn-play").removeClass("playing");
+	  	$('.js-player').trigger('stop') 
+	  }	
 	}
 
-	// Have printTime be called when the time is updated
 	$('.js-player').on('timeupdate', printTime);
 
+	$(".author").on("click",function(event){
+    	event.preventDefault();
+	 	$.ajax({
+		  	type: 'GET',
+		  	url: 'https://api.spotify.com/v1/artists/' + currentArtist,
+		 	success: function(response){
+		      	showArtist(response);
+		    },
+		    error: function(){ 
+		    	console.log("Ohhhhhh");
+		    }
+	  	});
+	});
 
-		
-	
+	function showArtist(response){
+		$('.modal-body').html('');
+		$('.modal-body').append('<h4> Name: '  + response.name + '</h4>');
+		$('.modal-body').append('<h4> Followers: '  + response.followers.total + '</h4>');	
+	}
+
+
 });	
